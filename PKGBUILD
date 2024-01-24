@@ -26,7 +26,7 @@ conflicts=('conan1')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/conan-io/conan/archive/${pkgver}.tar.gz")
 
 prepare() {
-  cd $pkgname-$pkgver
+  cd "$srcdir/${pkgname}-${pkgver}"
   # Remove maximum version constraints
   sed -i -r 's|(.*),.*|\1|g' conans/requirements.txt
   sed -i -r 's|(.*),.*|\1|g' conans/requirements_server.txt
@@ -34,12 +34,12 @@ prepare() {
  }
 
 build() {
-  cd "$srcdir/conan-$pkgver"
+  cd "$srcdir/${pkgname}-${pkgver}"
   python setup.py build
 }
 
 package() {
-  cd "$srcdir/conan-$pkgver"
+  cd "$srcdir/${pkgname}-${pkgver}"
   python setup.py install --optimize=1 --root=${pkgdir}
   install -m755 -d "${pkgdir}/usr/share/licenses/conan"
   install -m644 LICENSE.md "${pkgdir}/usr/share/licenses/conan/"
