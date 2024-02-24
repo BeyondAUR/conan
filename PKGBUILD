@@ -1,7 +1,7 @@
 # Maintainer: Tomislav Ivek <tomislav.ivek@gmail.com>
 
 pkgname=('conan')
-pkgver=2.0.17
+pkgver=2.1.0
 pkgrel=1
 pkgdesc="A distributed, open source, C/C++ package manager."
 arch=('any')
@@ -23,7 +23,8 @@ depends=('sqlite'
          'python-pyjwt>=2.4.0')
 conflicts=('conan1')
 
-source=("${pkgname}-${pkgver}.tar.gz::https://github.com/conan-io/conan/archive/${pkgver}.tar.gz")
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/conan-io/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
+b2sums=()
 
 prepare() {
   cd "$srcdir/${pkgname}-${pkgver}"
@@ -46,4 +47,3 @@ package() {
   install -m755 -d "${pkgdir}/usr/share/doc/conan"
   install -m644 contributors.txt "${pkgdir}/usr/share/doc/conan/"
 }
-md5sums=('5d6de61ef0ae18adce9502253680e05d')
