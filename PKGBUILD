@@ -1,7 +1,7 @@
 # Maintainer: Tomislav Ivek <tomislav.ivek@gmail.com>
 
 pkgname=('conan')
-pkgver=2.4.1
+pkgver=2.5.0
 pkgrel=1
 pkgdesc="A distributed, open source, C/C++ package manager."
 arch=('any')
@@ -24,7 +24,7 @@ depends=('sqlite'
 conflicts=('conan1')
 
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/conan-io/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
-b2sums=()
+b2sums=(2a4a3aba324b3aee968dde721e3659470912ce82eada0c9ffc37c4ff0b4c4b78b2927e3e9cde1f52b1104a3f3e8e32b3d7450643a83c14958c035051a63386a1)
 
 prepare() {
   cd "$srcdir/${pkgname}-${pkgver}"
