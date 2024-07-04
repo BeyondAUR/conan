@@ -1,13 +1,13 @@
 # Maintainer: Tomislav Ivek <tomislav.ivek@gmail.com>
 
 pkgname=('conan')
-pkgver=2.1.0
+pkgver=2.4.1
 pkgrel=1
 pkgdesc="A distributed, open source, C/C++ package manager."
 arch=('any')
 url="https://conan.io"
 license=('MIT')
-makedepends=('python-setuptools')
+makedepends=('python-setuptools' 'python-build' 'python-installer' 'python-wheel' 'patch')
 depends=('sqlite'
          'python-requests>=2.25'
          'python-urllib3>=1.26.6'
@@ -36,12 +36,12 @@ prepare() {
 
 build() {
   cd "$srcdir/${pkgname}-${pkgver}"
-  python setup.py build
+  python -m build --wheel --no-isolation
 }
 
 package() {
   cd "$srcdir/${pkgname}-${pkgver}"
-  python setup.py install --optimize=1 --root=${pkgdir}
+  python -m installer --destdir="${pkgdir}" dist/*.whl
   install -m755 -d "${pkgdir}/usr/share/licenses/conan"
   install -m644 LICENSE.md "${pkgdir}/usr/share/licenses/conan/"
   install -m755 -d "${pkgdir}/usr/share/doc/conan"
